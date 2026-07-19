@@ -6,6 +6,7 @@ import Link from "next/link";
 import { locale } from "next/root-params";
 import { Suspense } from "react";
 import "./globals.css";
+import GithubSvg from "@/components/github-svg";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -37,9 +38,17 @@ export default async function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
         >
             <body className="min-h-full bg-black flex flex-col">
-                <header className="max-w-3xl flex items-center py-8 gap-4 px-16 w-full mx-auto *:font-bold *:text-gray-300 *:transition-colors *:hover:text-white">
+                <header className="relative max-w-3xl flex items-center py-8 gap-4 px-16 w-full mx-auto *:font-bold *:text-gray-300 *:transition-colors *:hover:text-white">
                     <Link href="/en">Home</Link>
                     <Link href="/en/contact">Contact</Link>
+                    <Link
+                        href="https://github.com/DominikKoniarz/next-16.3.0-preview.6"
+                        className="absolute left-1/2 -translate-x-1/2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <GithubSvg />
+                    </Link>
                     <div className="ml-auto">
                         <Suspense>
                             <LocaleSwitcher />
