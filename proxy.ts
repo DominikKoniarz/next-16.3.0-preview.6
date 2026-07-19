@@ -8,10 +8,20 @@ import { NextResponse, type NextRequest } from "next/server";
 export function proxy(req: NextRequest) {
     const pathname = req.nextUrl.pathname;
 
-    if (!startsWithAllowedLocale(pathname) && shouldHandleI18nRouting(pathname)) {
+    if (
+        !startsWithAllowedLocale(pathname) &&
+        shouldHandleI18nRouting(pathname)
+    ) {
         return NextResponse.redirect(
             new URL(`/${defaultLocale}${pathname}`, req.url)
         );
+    }
+
+    if (
+        startsWithAllowedLocale(pathname) &&
+        shouldHandleI18nRouting(pathname)
+    ) {
+        return NextResponse.rewrite(new URL(req.url));
     }
 
     return NextResponse.next();
