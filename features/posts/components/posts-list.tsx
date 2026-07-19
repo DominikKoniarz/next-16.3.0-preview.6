@@ -35,7 +35,7 @@ function Post({ post, index }: { post: PostType; index: number }) {
     return (
         <li>
             <Link
-                href={`/posts/${post.id}`}
+                href={`/en/posts/${post.id}`}
                 className="flex flex-col gap-2"
                 prefetch={index % 2 === 0}
             >
