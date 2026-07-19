@@ -8,6 +8,10 @@ import { NextResponse, type NextRequest } from "next/server";
 export function proxy(req: NextRequest) {
     const pathname = req.nextUrl.pathname;
 
+    if (pathname.startsWith("/outside-of-root")) {
+        return NextResponse.next();
+    }
+
     if (
         !startsWithAllowedLocale(pathname) &&
         shouldHandleI18nRouting(pathname)

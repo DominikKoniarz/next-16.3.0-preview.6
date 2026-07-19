@@ -41,6 +41,7 @@ export default async function RootLayout({
                 <header className="relative max-w-3xl flex items-center py-8 gap-4 px-16 w-full mx-auto *:font-bold *:text-gray-300 *:transition-colors *:hover:text-white">
                     <Link href="/en">Home</Link>
                     <Link href="/en/contact">Contact</Link>
+                    <Link href="/outside-of-root">Test</Link>
                     <Link
                         href="https://github.com/DominikKoniarz/next-16.3.0-preview.6"
                         className="absolute left-1/2 -translate-x-1/2"
