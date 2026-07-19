@@ -1,8 +1,11 @@
+import { LocaleSwitcher } from "@/components/locale-switcher";
+import { locales } from "@/i18n/config";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import Link from "next/link";
 import { locale } from "next/root-params";
+import { Suspense } from "react";
+import "./globals.css";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -20,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-    return [{ locale: "pl" }];
+    return locales.map((locale) => ({ locale }));
 }
 
 export default async function RootLayout({
@@ -33,11 +36,15 @@ export default async function RootLayout({
             lang={await locale()}
             className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
         >
-            <body className="min-h-full flex flex-col">
+            <body className="min-h-full bg-black flex flex-col">
                 <header className="max-w-3xl flex items-center py-8 gap-4 px-16 w-full mx-auto *:font-bold *:text-gray-300 *:transition-colors *:hover:text-white">
                     <Link href="/en">Home</Link>
                     <Link href="/en/contact">Contact</Link>
-                    <div className="ml-auto">Locale: {await locale()}</div>
+                    <div className="ml-auto">
+                        <Suspense>
+                            <LocaleSwitcher />
+                        </Suspense>
+                    </div>
                 </header>
                 {children}
             </body>
